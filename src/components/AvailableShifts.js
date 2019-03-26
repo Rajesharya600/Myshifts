@@ -180,6 +180,8 @@ export default class AvailableShifts extends Component {
                                                             ShiftOverlapping = true;
                                                         } else if (endTime > shiftStartTime && endTime < shiftEndTime) {
                                                             ShiftOverlapping = true;
+                                                        } else if ( endTime === shiftEndTime) {
+                                                            ShiftOverlapping = true;
                                                         } else {
                                                             ShiftOverlapping = false;
                                                         }
@@ -210,7 +212,7 @@ export default class AvailableShifts extends Component {
                                                         ? 'Cancel'
                                                         : 'Book'
                                                     if (currentBookingStatus === 'Ongoing' || currentBookingStatus === 'Upcoming') {
-                                                        if (ShiftOverlapping) {
+                                                        if (ShiftOverlapping && !data.booked) {
                                                             return (
                                                                 <View key={data.id} style={styles.shiftView}>
                                                                     <View style={styles.shiftTimeView}>
@@ -246,7 +248,6 @@ export default class AvailableShifts extends Component {
                                                                         ]}>{bookStatus}</Text>
                                                                     </TouchableOpacity>
                                                                 </View>
-
                                                             )
                                                         }
                                                     }
